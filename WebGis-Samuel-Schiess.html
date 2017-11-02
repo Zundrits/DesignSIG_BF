@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+.right {
+  float:right;
+  width:20%;
+}
+
+.main {
+  float:left;
+  width:60%;
+}
+
+.left {
+  float:left;
+  width:20%;
+}
+
+.container {
+    width: 100%;
+}
+
+header, footer {
+	font-family: calibri
+    padding: 1em;
+    color: black;
+    clear: left;
+	margin: 0cm 1cm 0cm 1cm;
+}
+	
+
+}
+
+p		{font-family:calibri} 
+h1		{font-family:calibri}
+h2		{font-family:calibri}
+h3		{font-family:calibri}
+
+a:link 	{
+    color: black; 
+    background-color: transparent;
+	font-family:calibri
+    text-decoration: none;
+		}
+
+a:visited {
+    color: brown;
+	font-family:calibri
+    background-color: transparent;
+    text-decoration: none;
+}
+
+@media (max-width:800px) {
+  .left, .main, .right {
+    width:100%;
+
+</style>
+
+<script>
+function disappearfun() {
+	var x = document.getElementById("links");
+	if (x.style.display === "none") {
+		x.style.display = "block";
+	} else {
+		x.style.display = "none";
+    }
+}
+</script>
+<script>
+function myMap() {
+    var mapOptions = {
+        center: new google.maps.LatLng(12.3936524,-1.5374462),
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+}</script>
+
+</head>
+
+<body background="https://www.cityzeum.com/images/destination/default/181-burkina-faso.jpg">
+
+<div class="right" align="right">
+<img src="http://www.nationalflaggen.de/pix/flaggen/flagge_burkina_faso_001.gif" alt="Nationalflag" width="50%" height="30%" style="margin: -0.5cm 1cm 0cm 0cm;">
+</div>
+
+<div class="left" align="left">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" 
+alt="Linux" width="40%" height="30%" style="margin: -1cm 1cm 0cm 0cm;">
+</div>
+
+<h1 style = "font-size:48px; background-color:orange;" align="center">WebGis Burkina Faso</h1>
+<h3 style = "font-size:36px;" align="left">This could be the design of the WebGis for Burkina Faso</h3>
+
+<div  id="links" class="right" align = "center" style = "background-color:orange; margin: 0cm 1cm 1cm 1cm;">
+<br><b><h2>Links</h2>
+<br><p style = "font-size: 20px;">
+<a href="http://www.gouvernement.gov.bf/">Website Gouvernement Burkina Faso</a>
+<br><br><a href="http://www.googlemaps.com/">Google Maps</a>
+<br><br><a href="http://www.cff.ch/">Site Web CFF</a></p></b><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<div class="main" id="map" style="width:65%;height:610px; border:5px solid orange; margin:0cm 1cm 1cm 1cm">
+
+<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+</div>
+
+<div class="container">
+<footer>
+<button class = "right" style="background-color:black; color:white; border:orange, cursor:pointer;" align="right" onclick="disappearfun()">Hide Links</button>
+<br><br><h4 style="background-color:orange" align="center">Samuel Schiess, EPFL, 24.10.2017</h4>
+</footer></div>
+
+<title>SIG BF</title>
+</body>
+</html>
