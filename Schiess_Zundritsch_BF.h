@@ -12,6 +12,7 @@ var map = new ol.Map({target: 'map});
     zoom: 2
     }));
    
+    
  
 </body>
 </html>
