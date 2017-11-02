@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+
+
+
 <head>
     <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
     <script src="http://openlayers.org/en/v3.10.1/build/ol.js" type="text/javascript"></script>
@@ -37,14 +40,24 @@
     
     
     var osmSource = new ol.source.OSM();
-    
     var osmLayer = new ol.layer.Tile({
             source: osmSource
             });
 
     map.addLayer(osmLayer);
    
- </script>
+     </script>
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+$( document ).ready(function() {
+    console.log( "document loaded" );
+});
+
+$( window ).on( "load", function() {
+    console.log( "window loaded" );
+});
+</script>
  
 </body>
 </html>
