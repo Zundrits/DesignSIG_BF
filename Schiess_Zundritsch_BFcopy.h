@@ -3,17 +3,8 @@
 <head>
 <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
 <script src="http://openlayers.org/en/v3.10.1/build/ol.js" type="text/javascript"></script>
-<title>openlayer sample </title>
-<style>
-html, body{
-    height:100%;
-    width:100:
-    }
-#map {
-height:100%;
-}
-</style>
-<title>Openlayer sample</title>
+<title>openlayer sample </title> 
+
 </head>
  <body>
  
