@@ -8,9 +8,9 @@
 	
 	var Point_Style = new ol.style.Style({
             image: new ol.style.Circle({
-                    radius: 5,
-                    fill: new ol.style.Fill({color: 'red'}),
-                    stroke: new ol.style.Stroke({color: 'red', width: 0})
+                    radius: 1,
+                    fill: new ol.style.Fill({color: 'lightblue'}),
+                    stroke: new ol.style.Stroke({color: 'lightblue', width: 0})
             })
     });
     
@@ -76,7 +76,7 @@
     	
     	//Add vectorroads geojson
     var places = new ol.layer.Vector({
-        style: BF_Style,
+        style: Point_Style,
       source: new ol.source.Vector({
         url: '../public/geojson/places.geojson',
         format: new ol.format.GeoJSON(),
