@@ -9,8 +9,8 @@
 	var Point_Style = new ol.style.Style({
             image: new ol.style.Circle({
                     radius: 5,
-                    fill: new ol.style.Fill({color: 'black'}),
-                    stroke: new ol.style.Stroke({color: 'black', width: 0})
+                    fill: new ol.style.Fill({color: 'red'}),
+                    stroke: new ol.style.Stroke({color: 'red', width: 0})
             })
     });
     
@@ -68,11 +68,20 @@
     var vectorroads = new ol.layer.Vector({
         style: BF_Style,
       source: new ol.source.Vector({
-        url: './geojson/BF_Geojson.geojson',
+        url: '../public/geojson/BF_Geojson.geojson',
         format: new ol.format.GeoJSON(),
       })
     });
     	map.addLayer(vectorroads);
+    	
+    	//Add vectorroads geojson
+    var places = new ol.layer.Vector({
+        style: BF_Style,
+      source: new ol.source.Vector({
+        url: '../public/geojson/places.geojson',
+        format: new ol.format.GeoJSON(),
+      })
+    });
+    	map.addLayer(places);
 
 });
-
