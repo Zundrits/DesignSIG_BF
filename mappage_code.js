@@ -13,6 +13,7 @@
                     stroke: new ol.style.Stroke({color: 'black', width: 0})
             })
     });
+    
  	var style = new ol.style.Style({
         fill: new ol.style.Fill({
           color: 'rgba(255, 255, 255, 0.6)'
@@ -36,7 +37,7 @@
 
 
     // Take out this function
-   // $(document).ready(function(){
+   $(document).ready(function(){
 	    
         // Crée la carte avec une couche de fond MapQuest (ou OpenStreetMap en comment)
 	    map = new ol.Map({
@@ -52,19 +53,16 @@
           	  zoom: 7
 		})
 	    });
-	    
-	    
+	
 	     //Add vectorroads geojson
 	    var vectorLayer = new ol.layer.Vector({
+	    style: BF_Style,
         source: new ol.source.Vector({
           url: 'https://openlayers.org/en/v4.4.2/examples/data/geojson/countries.geojson',
-          format: new ol.format.GeoJSON()
-        }),
-        style: function(feature) {
-          style.getText().setText(feature.get('name'));
-          return style;
-        }
+          format: new ol.format.GeoJSON(),
+        })
       });
+        map.addLayer(vectorLayer);
 	    
 	     //Add vectorroads geojson
     var vectorroads = new ol.layer.Vector({
@@ -74,6 +72,7 @@
         format: new ol.format.GeoJSON(),
       })
     });
-    map.addLayer(vectorroads);
+    	map.addLayer(vectorroads);
 
+});
 
