@@ -14,27 +14,6 @@
             })
     });
     
- 	var style = new ol.style.Style({
-        fill: new ol.style.Fill({
-          color: 'rgba(255, 255, 255, 0.6)'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#319FD3',
-          width: 1
-        }),
-        text: new ol.style.Text({
-          font: '12px Calibri,sans-serif',
-          fill: new ol.style.Fill({
-            color: '#000'
-          }),
-          stroke: new ol.style.Stroke({
-            color: '#fff',
-            width: 3
-          })
-        })
-      });
-
-
 
     // Take out this function
    $(document).ready(function(){
@@ -60,6 +39,7 @@
         source: new ol.source.Vector({
           url: 'https://openlayers.org/en/v4.4.2/examples/data/geojson/countries.geojson',
           format: new ol.format.GeoJSON(),
+          wrapX: false
         })
       });
         map.addLayer(vectorLayer);
@@ -86,7 +66,7 @@
     	
     	// Add new vector layer to stock
     	var source = new ol.source.Vector()
-    	var vector = new ol.layer.Vector({
+    	var drawvector = new ol.layer.Vector({
         source: source,
         style: new ol.style.Style({
           fill: new ol.style.Fill({
@@ -104,9 +84,10 @@
           })
         })
       });
-      
+      map.addLayer(drawvector);
     
     	
+
     	
     	//Add tool to modify layer 
     	
@@ -127,6 +108,18 @@
 
       }
 
+		//Add tool to select
+    	
+    	var select = new ol.interaction.Select({
+        wrapX: false
+      });
+      map.addInteraction(select)
+      
+       var modify = new ol.interaction.Modify({
+        features: select.getFeatures()
+      });
+      map.addInteraction(getfeature)
+      
       /**
        * Handle change event.
        */
