@@ -14,8 +14,23 @@
             })
     });
     
+// Style Feature overlay 
 
-    // Take out this function
+      var featureOverlay = new ol.layer.Vector({
+        source: new ol.source.Vector(),
+        map: map,
+        style: new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: '#f00',
+            width: 1
+          }),
+          fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.1)'
+          })
+        })
+      });
+
+
    $(document).ready(function(){
 	    
         // Crée la carte avec une couche de fond MapQuest (ou OpenStreetMap en comment)
@@ -64,71 +79,111 @@
     });
     	map.addLayer(places);
     	
-    	// Add new vector layer to stock
-    	var source = new ol.source.Vector()
-    	var drawvector = new ol.layer.Vector({
-        source: source,
-        style: new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(255, 255, 255, 0.2)'
-          }),
-          stroke: new ol.style.Stroke({
-            color: '#ffcc33',
-            width: 2
-          }),
-          image: new ol.style.Circle({
-            radius: 7,
-            fill: new ol.style.Fill({
-              color: '#ffcc33'
-            })
-          })
-        })
-      });
-      map.addLayer(drawvector);
-    
+// Add new vector layer to stock
+ //    	var source = new ol.source.Vector()
+//     	var drawvector = new ol.layer.Vector({
+//         source: source,
+//         style: new ol.style.Style({
+//           fill: new ol.style.Fill({
+//             color: 'rgba(255, 255, 255, 0.2)'
+//           }),
+//           stroke: new ol.style.Stroke({
+//             color: '#ffcc33',
+//             width: 2
+//           }),
+//           image: new ol.style.Circle({
+//             radius: 7,
+//             fill: new ol.style.Fill({
+//               color: '#ffcc33'
+//             })
+//           })
+//         })
+//       });
+//       map.addLayer(drawvector);
+//     
     	
 
     	
-    	//Add tool to modify layer 
-    	
-    	var modify = new ol.interaction.Modify({source: source});
-      map.addInteraction(modify);
+ //    	Add tool to modify layer 
+//     	
+//     	var modify = new ol.interaction.Modify({source: source});
+//       map.addInteraction(modify);
+// 
+//       var draw, snap; // global so we can remove them later
+//       var typeSelect = document.getElementById('type');
+// 
+//       function addInteractions() {
+//         draw = new ol.interaction.Draw({
+//           source: source,
+//           type: /** @type {ol.geom.GeometryType} */ (typeSelect.value)
+//         });
+//         map.addInteraction(draw);
+//         snap = new ol.interaction.Snap({source: source});
+//         map.addInteraction(snap);
+// 
+//       }
+// 
+// 		Add tool to select
+//     	
+//     	var select = new ol.interaction.Select({
+//         wrapX: false
+//       });
+//       map.addInteraction(select)
+//       
+//        var modify = new ol.interaction.Modify({
+//         features: select.getFeatures()
+//       });
+//       map.addInteraction(getfeature)
+//       
+//       /**
+//        * Handle change event.
+//        */
+//       typeSelect.onchange = function() {
+//         map.removeInteraction(draw);
+//         map.removeInteraction(snap);
+//         addInteractions();
+//       };
+// 
+//       addInteractions();
+      
+      // Display feature info 
+      
+            var highlight;
+      var displayFeatureInfo = function(pixel) {
 
-      var draw, snap; // global so we can remove them later
-      var typeSelect = document.getElementById('type');
-
-      function addInteractions() {
-        draw = new ol.interaction.Draw({
-          source: source,
-          type: /** @type {ol.geom.GeometryType} */ (typeSelect.value)
+        var feature = map.forEachFeatureAtPixel(pixel, function(feature) {
+          return feature;
         });
-        map.addInteraction(draw);
-        snap = new ol.interaction.Snap({source: source});
-        map.addInteraction(snap);
 
-      }
+        var info = document.getElementById('info');
+        if (feature) {
+          info2.innerHTML = feature.getId() + ': ' + feature.get('name');
+        } else {
+          info2.innerHTML = '&nbsp;';
+        }
 
-		//Add tool to select
-    	
-    	var select = new ol.interaction.Select({
-        wrapX: false
-      });
-      map.addInteraction(select)
-      
-       var modify = new ol.interaction.Modify({
-        features: select.getFeatures()
-      });
-      map.addInteraction(getfeature)
-      
-      /**
-       * Handle change event.
-       */
-      typeSelect.onchange = function() {
-        map.removeInteraction(draw);
-        map.removeInteraction(snap);
-        addInteractions();
+        if (feature !== highlight) {
+          if (highlight) {
+            featureOverlay.getSource().removeFeature(highlight);
+          }
+          if (feature) {
+            featureOverlay.getSource().addFeature(feature);
+          }
+          highlight = feature;
+        }
+
       };
 
-      addInteractions();
+      map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+          return;
+        }
+        var pixel = map.getEventPixel(evt.originalEvent);
+        displayFeatureInfo(pixel);
+      });
+
+      map.on('click', function(evt) {
+        displayFeatureInfo(evt.pixel);
+      });
 
 });
