@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+ 
+	var express = require('express'); 
+	var router = express.Router();
+	
+	var mongoose = require('mongoose');
+	var Schema = moongoose.Schema;
+	
+	// Mongoose connection to MongoDB
+	mongoose.connect('mongodb://localhost:27017/BF_WebGIS', function (error) {
+		if (error) {
+			console.log(error);
+		}
+	});
+	
+	var Json = mongoose.model('JString', JsonSchema, 'layercollection');
+	
+	
+	
+	/* GET home page. */
+	router.get('/',function(req,res,next) {
+		res.render('index', {title: 'Express' });
+		});
+		
+		module.exports = router; 
+  </body>
+</html>
