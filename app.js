@@ -25,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+// gets home change if we change name of _OL_Zundritsch_Schiess
+app.get('/home', function(req,res){
+	res.sendFile('/views/_OL_Zundritsch_Schiess.html, {root: __dirname});
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

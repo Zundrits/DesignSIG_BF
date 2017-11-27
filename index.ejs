@@ -15,7 +15,24 @@
 		}
 	});
 	
+	varJsonSchema = new Schema({
+		name: String, 
+		type: Schema.Types.Mixed
+		});
+	
 	var Json = mongoose.model('JString', JsonSchema, 'layercollection');
+	
+	var obs = newSchma({
+		name: String,
+		comment: String, 
+		added: String, 
+		image: String, 
+		geometry : {
+			type: {type: String},
+			coordinates: []
+		}
+	});
+	var observation = mongoose.model('observation', obs, 'observations'); 
 	
 	
 	
@@ -25,5 +42,37 @@
 		});
 		
 		module.exports = router; 
+
+// Added 27.11 
+		
+	// GET GeoJSON data. 
+	
+	router.get('mapjson/:name', function (req,res) {
+		if (req.params.name) {
+			Json.findOne({ name: req.params.name },{}, function{err, docs){
+				res.json(docs);
+					});
+	
+	router.get('/form', function(req,res) {
+		observation.find({}, function(err,docs){
+			res.send(docs);
+		});
+	});
+	
+	router.post('/form', function(req, res) {
+		console.log(req.body);
+		var newObs = new observation(req.body);
+		newObs.save(function(err,newobj9 {
+			if(err) {
+				res.sed(err.message);
+			}
+			else {
+				res.send(newobj);
+			};
+		});
+	});
+
+// End Added 27.11 
+	
   </body>
 </html>
