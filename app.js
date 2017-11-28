@@ -27,7 +27,7 @@ app.use('/users', users);
 
 // gets home change if we change name of _OL_Zundritsch_Schiess
 app.get('/home', function(req,res){
-	res.sendFile('/views/_OL_Zundritsch_Schiess.html, {root: __dirname});
+	res.sendFile('/views/OL.html', {root: __dirname});
 });
 
 

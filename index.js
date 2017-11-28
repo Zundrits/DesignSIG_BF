@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
- 
 	var express = require('express'); 
 	var router = express.Router();
 	
@@ -41,7 +37,7 @@
 		res.render('index', {title: 'Express' });
 		});
 		
-		module.exports = router; 
+		
 
 // Added 27.11 
 		
@@ -49,9 +45,11 @@
 	
 	router.get('mapjson/:name', function (req,res) {
 		if (req.params.name) {
-			Json.findOne({ name: req.params.name },{}, function{err, docs){
+			Json.findOne({ name: req.params.name },{}, function(err, docs){
 				res.json(docs);
-					});
+			});
+		}
+	});
 	
 	router.get('/form', function(req,res) {
 		observation.find({}, function(err,docs){
@@ -62,7 +60,7 @@
 	router.post('/form', function(req, res) {
 		console.log(req.body);
 		var newObs = new observation(req.body);
-		newObs.save(function(err,newobj9 {
+		newObs.save(function(err,newobj) {
 			if(err) {
 				res.sed(err.message);
 			}
@@ -73,6 +71,5 @@
 	});
 
 // End Added 27.11 
-	
-  </body>
-</html>
+
+module.exports = router; 
